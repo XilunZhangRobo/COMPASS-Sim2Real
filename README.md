@@ -25,7 +25,7 @@ python3 main.py --exp_name pusher
 ## Running code for drop environment and random action
 python3 main.py --exp_name drop
 
-## Running code for air hockey environment with SAC/PPO Agent
+## Running code for air hockey environment with SAC/PPO Agent training in the loop
 python3 main.py --use_sac_agent 
 python3 main.py --use_ppo_agent
 ```
