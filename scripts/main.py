@@ -95,8 +95,6 @@ def main(args):
         """
         traj_real_all, act_real_traj = log_performance_on_current_e_dr(args, k, single_env, causual_DR_writer, e_dr_sim, e_dr_real, command_act_list, real_traj_act_load)
         
-        ## NO BUG ABOVE!!!
-        
         
         """ === [COMPASS-1] Causality Guided DR === """
         delta_tau_e_dr_all = []
@@ -114,19 +112,14 @@ def main(args):
             delta_tau_e_dr_all.append(delta_tau_e_dr)
             act_dr_all.append(act_dr)
             context_purturb_matrix_dict_all.append(copy.deepcopy(context_purturb_matrix_dict))
-            # repeat act_real_traj[i] for args.n_context times and append to act_real_all
             act_real_all.append(np.concatenate([act_real_traj[i][0][0] for _ in range(args.n_context)], axis=0))
         
         
         action_space_len = len(act_real_traj[0][0][0])
         delta_tau_e_dr_all = np.concatenate(delta_tau_e_dr_all, axis=0) 
-        # act_dr_all = np.concatenate(act_dr_all, axis=0).reshape(-1, 4) 
-        # act_real_all = np.concatenate(act_real_all, axis=0).reshape(-1, 4)
         act_dr_all = np.concatenate(act_dr_all, axis=0).reshape(-1, action_space_len) 
         act_real_all = np.concatenate(act_real_all, axis=0).reshape(-1, action_space_len)
-        # print('delta_tau_e_dr_all.shape', delta_tau_e_dr_all.shape)
-        # print('act_dr_all.shape', act_dr_all.shape)
-        # print('act_real_all.shape', act_real_all.shape)
+
         """ === [COMPASS-2] Causality Model Training === """
         data_all = []
         for matrix_dict in context_purturb_matrix_dict_all: 
@@ -140,17 +133,6 @@ def main(args):
         causal_model = init_causal_model(k, args, len(interested_context), delta_tau_e_dr_all.shape[1], action_space_len)
         
         
-        # _save_tensor_with_timestamp(causal_model, name="pre_causal_model")
-        # print('Early Quit-1 -- INIT causal_model')
-        # quit()
-        
-        
-        ## Check causal model initial weight before training
-        # print ("causal_model:", causal_model)
-        #print("causal_model_2.weight:", print(list(causal_model.parameters())[2]))
-        # print("causal_model_-1.weight:", print(list(causal_model.parameters())[-1]))
-        #quit()
-        ## 
         # Train causal model; Get interested context from causal graph
         causal_model = train_causal_model(device, k, args, causual_DR_writer, causal_model, context_purturb_matrix_dict, delta_tau_e_dr_all[index], data_all[index], act_dr_all[index], act_real_all[index])
         
