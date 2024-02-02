@@ -189,16 +189,11 @@ class LightingModder(BaseModder):
                 light_name = "light"
             else:
                 light_name = name
-            # context[f"{header}@{light_name}@pos"] = np.array(self.get_pos(name))
             context[f"{header}@{light_name}@pos_x"] = np.array(self.get_pos(name)[0])
             context[f"{header}@{light_name}@pos_y"] = np.array(self.get_pos(name)[1])
             context[f"{header}@{light_name}@pos_z"] = np.array(self.get_pos(name)[2])
             context[f"{header}@{light_name}@dir"] = np.array(self.get_dir(name))
-            # context[f"{header}@{light_name}@dir_x"] = np.array(self.get_dir(name)[0])
-            # context[f"{header}@{light_name}@dir_y"] = np.array(self.get_dir(name)[1])
-            # context[f"{header}@{light_name}@dir_z"] = np.array(self.get_dir(name)[2])
             context[f"{header}@{light_name}@specular"] = np.array(self.get_specular(name))
-            # context[f"{header}@{light_name}@ambient"] = np.array(self.get_ambient(name))
             context[f"{header}@{light_name}@ambient_r"] = np.array(self.get_ambient(name)[0])
             context[f"{header}@{light_name}@ambient_g"] = np.array(self.get_ambient(name)[1])
             context[f"{header}@{light_name}@ambient_b"] = np.array(self.get_ambient(name)[2])
@@ -225,10 +220,6 @@ class LightingModder(BaseModder):
                     self.set_pos_z(light_name, val)
                 elif attr == "dir":
                     self.set_dir(light_name, val)
-                # elif attr == "dir_y":
-                #     self.set_dir_y(light_name, val)
-                # elif attr == "dir_z":
-                #     self.set_dir_z(light_name, val)
                 elif attr == "specular":
                     self.set_specular(light_name, val)
                 elif attr == "ambient_r":
@@ -249,16 +240,11 @@ class LightingModder(BaseModder):
         Reloads the saved parameter values.
         """
         for name in self.light_names:
-            # self.set_pos(name, self._defaults[name]["pos"])
             self.set_pos_x(name, self._defaults[name]["pos"][0])
             self.set_pos_y(name, self._defaults[name]["pos"][1])
             self.set_pos_z(name, self._defaults[name]["pos"][2])
             self.set_dir(name, self._defaults[name]["dir"])
-            # self.set_dir_x(name, self._defaults[name]["dir"][0])
-            # self.set_dir_y(name, self._defaults[name]["dir"][1])
-            # self.set_dir_z(name, self._defaults[name]["dir"][2])
             self.set_specular(name, self._defaults[name]["specular"])
-            # self.set_ambient(name, self._defaults[name]["ambient"])
             self.set_ambient_r(name, self._defaults[name]["ambient"][0])
             self.set_ambient_g(name, self._defaults[name]["ambient"][1])   
             self.set_ambient_b(name, self._defaults[name]["ambient"][2])
@@ -278,18 +264,6 @@ class LightingModder(BaseModder):
                 
             if self.randomize_pos_z:
                 self._randomize_pos_z(name)
-                
-            # if self.randomize_position:
-            #     self._randomize_position(name)
-            
-            # if self.randomize_dir_x:
-            #     self._randomize_dir_x(name)
-            
-            # if self.randomize_dir_y:
-            #     self._randomize_dir_y(name)
-            
-            # if self.randomize_dir_z:
-            #     self._randomize_dir_z(name)
 
             if self.randomize_direction:
                 self._randomize_direction(name)
@@ -297,8 +271,6 @@ class LightingModder(BaseModder):
             if self.randomize_specular:
                 self._randomize_specular(name)
 
-            # if self.randomize_ambient:
-            #     self._randomize_ambient(name)
             if self.randomize_ambient_r:
                 self._randomize_ambient_r(name)
             
