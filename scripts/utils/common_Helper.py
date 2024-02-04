@@ -41,17 +41,10 @@ from torch.nn import functional as F
 from collections import OrderedDict
 import pickle
 
+from env_pusher import PusherSingleAction
 
-# from env_pusher import PusherSingleAction
-
-# from scripts.env_pusher import PusherSingleAction
-
-from scripts.env_pusher import PusherSingleAction
-
-from scripts.env_drop import DropSingleAction
-from scripts.Pose_run import PoseChanger
-
-from scripts.utils.e_dr_pusher_xilun import *
+from env_drop import DropSingleAction
+from Pose_run import PoseChanger
 
 """ 
 === Env Params and Clip Range ===

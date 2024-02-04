@@ -40,10 +40,10 @@ from torch.nn import functional as F
 from collections import OrderedDict
 
 
-from scripts.utils.common_Helper_POSE_xilun import *
+from utils.common_Helper import *
 
-from scripts.utils.common_Helper_POSE_xilun import save_data, CLIP_RANGE
-from scripts.utils.causal_sim2real import CausalSim2Real
+from utils.common_Helper import save_data, CLIP_RANGE
+from utils.causal_sim2real import CausalSim2Real
 
 
 """ 
@@ -337,11 +337,12 @@ def optimize_env_params(device, iter, writer, args, causal_model, env_params, co
         
         optimizer.step()
         optimizer.zero_grad()
-
+        # X.data[:, :-action_len] = torch.FloatTensor(X_copy[:, :-action_len]).to(device)
         X.data[:, -action_len:] = torch.cuda.FloatTensor(X_copy[:, -action_len:])
         
         # set the rest dimension to the average across the samples of X.data
         mean_X = X.data[:, :-action_len].cpu().detach().numpy().mean(axis=0)
+        # X.data[:, :-action_len] = torch.FloatTensor(np.repeat(mean_X.reshape((1, -1)), X.shape[0], axis=0)).to(device)
         X.data[:, :-action_len] = torch.cuda.FloatTensor(np.repeat(mean_X.reshape((1, -1)), X.shape[0], axis=0))
         
         # store x in x_hist

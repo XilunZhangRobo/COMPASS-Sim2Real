@@ -14,11 +14,11 @@ import numpy as np
 import copy
 
 
-from scripts.utils.common_Helper import *
+from utils.common_Helper import *
 
-from scripts.utils.causual_DR_additional_Helper import causality_guided_DR, init_causal_model, optimize_env_params, train_causal_model, _save_tensor_with_timestamp
+from utils.causual_DR_additional_Helper import causality_guided_DR, init_causal_model, optimize_env_params, train_causal_model, _save_tensor_with_timestamp
 
-from scripts.utils.train_agent_additional_Helper import init_training_callback, train_agent_and_get_cmd_act, train_agent_only
+from utils.train_agent_additional_Helper import init_training_callback, train_agent_and_get_cmd_act, train_agent_only
 
 
 
@@ -26,6 +26,7 @@ from scripts.utils.train_agent_additional_Helper import init_training_callback, 
 def main(args):
     torch.cuda.set_device(0)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    # device = torch.device(args.device)
     
     """ === [Init] prepare the essential objects for the main pipeline === """
     #### create tensorboard causual_DR_writer, train_agent_writer
@@ -210,10 +211,8 @@ if __name__ == "__main__":
     
     parser.add_argument('--optimize_steps', type=int, default=2000, help="how many steps compass optimize the environment parameters.")
     
-
     #### main algorithm parameters
     parser.add_argument('--seed', type=int, default=0, help="Random seed.")
-
     parser.add_argument('--iter', type=int, default=10, help="Maximum number of total iterations")
     
     parser.add_argument('--load_real_dataset', type=str, default=None, help="Load real trajectory")
