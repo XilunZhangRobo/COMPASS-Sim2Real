@@ -36,6 +36,9 @@ There are a few parameters that you can tune from arguments, please feel free to
 ## Both the causal discovery and agent training will be saved under logdir folder
 tensorboard --logdir= /Sim2Real-Compass/scripts/logdir/
 ```
+## Acknowledgement 
+[Robosuite: A Modular Simulation Framework and Benchmark for Robot Learning](https://robosuite.ai/)
+[stable-baselines3](https://github.com/DLR-RM/stable-baselines3)
 
 ## Citation
 ```
