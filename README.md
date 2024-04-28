@@ -38,7 +38,7 @@ tensorboard --logdir= /Sim2Real-Compass/scripts/logdir/
 ```
 ## Acknowledgement 
 [Robosuite: A Modular Simulation Framework and Benchmark for Robot Learning](https://robosuite.ai/) <br>
-[stable-baselines3](https://github.com/DLR-RM/stable-baselines3)
+[Stable-Baselines3](https://github.com/DLR-RM/stable-baselines3)
 
 ## Citation
 ```
