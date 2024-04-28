@@ -37,7 +37,7 @@ There are a few parameters that you can tune from arguments, please feel free to
 tensorboard --logdir= /Sim2Real-Compass/scripts/logdir/
 ```
 ## Acknowledgement 
-[Robosuite: A Modular Simulation Framework and Benchmark for Robot Learning](https://robosuite.ai/) \\ 
+[Robosuite: A Modular Simulation Framework and Benchmark for Robot Learning](https://robosuite.ai/) <br>
 [stable-baselines3](https://github.com/DLR-RM/stable-baselines3)
 
 ## Citation
